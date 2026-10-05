@@ -2,21 +2,24 @@
   "name": "url-shortener",
   "version": "1.0.0",
   "description": "A containerized URL Shortener application built with modern DevOps practices, CI/CD, and AWS deployment.",
- "main": "src/server.js",
-  "directories": {
-    "doc": "docs"
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "jest --runInBand"
   },
- "scripts": {
-  "test": "jest --runInBand",
-  "start": "node src/server.js",
-  "dev": "node --watch src/server.js"
-},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gensfit-collab/url-shortener.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "url-shortener",
+    "nodejs",
+    "express",
+    "rest-api",
+    "devops"
+  ],
+  "author": "Genesis P.",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
