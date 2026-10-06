@@ -67,3 +67,10 @@ override.tf.json
 tmp/
 temp/
 *.tmp
+# ================================
+# Prisma AI Agent Skills
+# ================================
+.agents/
+.claude/
+.cursor/
+.devin/

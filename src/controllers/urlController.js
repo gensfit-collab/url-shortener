@@ -3,7 +3,7 @@ const {
   getUrlByShortCode
 } = require('../services/urlService');
 
-function createUrl(req, res) {
+async function createUrl(req, res, next) {
   const { originalUrl } = req.body;
 
   if (!originalUrl) {
@@ -13,7 +13,7 @@ function createUrl(req, res) {
   }
 
   try {
-    const urlRecord = createShortUrl(originalUrl);
+    const urlRecord = await createShortUrl(originalUrl);
 
     return res.status(201).json({
       originalUrl: urlRecord.originalUrl,
@@ -22,36 +22,44 @@ function createUrl(req, res) {
       createdAt: urlRecord.createdAt
     });
   } catch (error) {
-    return res.status(500).json({
-      error: 'Failed to create short URL'
-    });
+    next(error);
   }
 }
 
-function getUrlInfo(req, res) {
+async function getUrlInfo(req, res, next) {
   const { shortCode } = req.params;
-  const urlRecord = getUrlByShortCode(shortCode);
 
-  if (!urlRecord) {
-    return res.status(404).json({
-      error: 'Short URL not found'
-    });
+  try {
+    const urlRecord = await getUrlByShortCode(shortCode);
+
+    if (!urlRecord) {
+      return res.status(404).json({
+        error: 'Short URL not found'
+      });
+    }
+
+    return res.status(200).json(urlRecord);
+  } catch (error) {
+    next(error);
   }
-
-  return res.status(200).json(urlRecord);
 }
 
-function redirectToOriginalUrl(req, res) {
+async function redirectToOriginalUrl(req, res, next) {
   const { shortCode } = req.params;
-  const urlRecord = getUrlByShortCode(shortCode);
 
-  if (!urlRecord) {
-    return res.status(404).json({
-      error: 'Short URL not found'
-    });
+  try {
+    const urlRecord = await getUrlByShortCode(shortCode);
+
+    if (!urlRecord) {
+      return res.status(404).json({
+        error: 'Short URL not found'
+      });
+    }
+
+    return res.redirect(urlRecord.originalUrl);
+  } catch (error) {
+    next(error);
   }
-
-  return res.redirect(urlRecord.originalUrl);
 }
 
 module.exports = {
