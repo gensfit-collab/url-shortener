@@ -1,33 +1,46 @@
 const crypto = require('crypto');
 
-const urls = new Map();
+const dbPromise = import('../prisma/db.mjs');
 
-function generateUniqueShortCode() {
+async function getDb() {
+  const { db } = await dbPromise;
+  return db;
+}
+
+async function generateUniqueShortCode() {
+  const db = await getDb();
+
   let shortCode;
 
   do {
     shortCode = crypto.randomBytes(4).toString('base64url').slice(0, 6);
-  } while (urls.has(shortCode));
 
-  return shortCode;
+    const existingUrl = await db.orm.public.Url
+      .where({ shortCode })
+      .first();
+
+    if (!existingUrl) {
+      return shortCode;
+    }
+  } while (true);
 }
 
-function createShortUrl(originalUrl) {
-  const shortCode = generateUniqueShortCode();
+async function createShortUrl(originalUrl) {
+  const db = await getDb();
+  const shortCode = await generateUniqueShortCode();
 
-  const urlRecord = {
+  return db.orm.public.Url.create({
     originalUrl,
-    shortCode,
-    createdAt: new Date().toISOString()
-  };
-
-  urls.set(shortCode, urlRecord);
-
-  return urlRecord;
+    shortCode
+  });
 }
 
-function getUrlByShortCode(shortCode) {
-  return urls.get(shortCode);
+async function getUrlByShortCode(shortCode) {
+  const db = await getDb();
+
+  return db.orm.public.Url
+    .where({ shortCode })
+    .first();
 }
 
 module.exports = {
