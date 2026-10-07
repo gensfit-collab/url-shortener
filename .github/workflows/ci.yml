@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: urlshortener
+          POSTGRES_PASSWORD: dockerpassword
+          POSTGRES_DB: url_shortener
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U urlshortener -d url_shortener"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql://urlshortener:dockerpassword@localhost:5432/url_shortener
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prepare database
+        run: node_modules/.bin/prisma db migrate
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run automated tests
+        run: npm test
+
+      - name: Build application
+        run: npm run build
+
+      - name: Build Docker image
+        run: docker build -t url-shortener-ci .
