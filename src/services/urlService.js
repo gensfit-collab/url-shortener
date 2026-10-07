@@ -12,17 +12,19 @@ async function generateUniqueShortCode() {
 
   let shortCode;
 
-  do {
-    shortCode = crypto.randomBytes(4).toString('base64url').slice(0, 6);
+  while (!shortCode) {
+    const candidate = crypto.randomBytes(4).toString('base64url').slice(0, 6);
 
     const existingUrl = await db.orm.public.Url
-      .where({ shortCode })
+      .where({ shortCode: candidate })
       .first();
 
     if (!existingUrl) {
-      return shortCode;
+      shortCode = candidate;
     }
-  } while (true);
+  }
+
+  return shortCode;
 }
 
 async function createShortUrl(originalUrl) {
