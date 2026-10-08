@@ -1,0 +1,84 @@
+<<<<<<< HEAD
+.terraform/
+*.tfstate
+*.tfstate.backup
+tfplan
+*.tfvars
+=======
+# ================================
+# Environment & Secrets
+# ================================
+.env
+.env.*
+!.env.example
+
+# ================================
+# Node.js
+# ================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ================================
+# Build & Coverage
+# ================================
+dist/
+build/
+coverage/
+.nyc_output/
+
+# ================================
+# Logs
+# ================================
+logs/
+*.log
+
+# ================================
+# OS Files
+# ================================
+.DS_Store
+Thumbs.db
+
+# ================================
+# IDE / Editor
+# ================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ================================
+# Docker
+# ================================
+docker-compose.override.yml
+
+# ================================
+# Terraform
+# ================================
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# ================================
+# Temporary Files
+# ================================
+tmp/
+temp/
+*.tmp
+# ================================
+# Prisma AI Agent Skills
+# ================================
+.agents/
+.claude/
+.cursor/
+.devin/
+>>>>>>> origin/main
