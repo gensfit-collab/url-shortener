@@ -32,4 +32,4 @@ jobs:
             docker pull majekodunmidev/url-shortener:1.0
             docker stop url-shortener || true
             docker rm url-shortener || true
-            docker run -d --name url-shortener -p 5000:5000 --env-file .env your-dockerhub-user/url-shortener:latest
+            docker run -d --name url-shortener -p 5000:5000 --env-file .env majekodunmidev/url-shortener:1.0
