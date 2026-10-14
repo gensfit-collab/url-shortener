@@ -1,0 +1,35 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t majekodunmidev/url-shortener:1.0 .
+
+      - name: Push Docker image to Docker Hub
+        run: |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker tag url-shortener majekodunmidev/url-shortener:1.0
+          docker push majekodunmidev/url-shortener:1.0
+
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull majekodunmidev/url-shortener:1.0
+            docker stop url-shortener || true
+            docker rm url-shortener || true
+            docker run -d --name url-shortener -p 5000:5000 --env-file .env your-dockerhub-user/url-shortener:latest
