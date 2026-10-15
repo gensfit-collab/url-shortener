@@ -1,6 +1,8 @@
+
 const {
   createShortUrl,
-  getUrlByShortCode
+  getUrlByShortCode,
+  getAllUrls
 } = require('../services/urlService');
 
 async function createUrl(req, res, next) {
@@ -44,6 +46,16 @@ async function getUrlInfo(req, res, next) {
   }
 }
 
+async function listUrls(req, res, next) {
+  try {
+    const urls = await getAllUrls();
+
+    return res.status(200).json(urls);
+  } catch (error) {
+    next(error);
+  }
+}
+
 async function redirectToOriginalUrl(req, res, next) {
   const { shortCode } = req.params;
 
@@ -65,5 +77,6 @@ async function redirectToOriginalUrl(req, res, next) {
 module.exports = {
   createUrl,
   getUrlInfo,
+  listUrls,
   redirectToOriginalUrl
 };

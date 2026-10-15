@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-.terraform/
-*.tfstate
-*.tfstate.backup
-tfplan
-*.tfvars
-=======
 # ================================
 # Environment & Secrets
 # ================================
@@ -60,6 +53,7 @@ docker-compose.override.yml
 .terraform/
 *.tfstate
 *.tfstate.*
+tfplan
 *.tfvars
 !*.tfvars.example
 crash.log
@@ -74,6 +68,7 @@ override.tf.json
 tmp/
 temp/
 *.tmp
+
 # ================================
 # Prisma AI Agent Skills
 # ================================
@@ -81,4 +76,3 @@ temp/
 .claude/
 .cursor/
 .devin/
->>>>>>> origin/main

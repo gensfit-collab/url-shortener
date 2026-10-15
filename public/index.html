@@ -4,221 +4,444 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta
     name="description"
-    content="Create short, clean and shareable URLs."
+    content="URL Shortener Studio — create, organise and manage shorter links from one workspace."
   >
+  <meta name="theme-color" content="#171816">
+  <title>URL Shortener Studio® — Your Workspace</title>
 
-  <title>URL Shortener</title>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+  <div class="dashboard">
 
-  <main class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a class="brand" href="#overview" aria-label="URL Shortener Studio home">
+        <span class="brand-symbol" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none">
+            <path
+              d="M16.5 23.5L23.5 16.5"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            />
+            <path
+              d="M13.5 25.5H11a6.5 6.5 0 0 1 0-13h7"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            />
+            <path
+              d="M26.5 14.5H29a6.5 6.5 0 0 1 0 13h-7"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
 
-    <section class="shortener-card">
+        <span class="brand-name">URL<span class="brand-mark">S.</span></span>
+        <span class="brand-label">SHORTEN / SHARE</span>
+      </a>
 
-      <!-- Header -->
-      <header class="header">
+      <div class="sidebar-divider"></div>
 
-        <a
-          href="/"
-          class="brand"
-          aria-label="URL Shortener home"
-        >
-          <span class="brand-mark">U</span>
+      <p class="nav-caption">WORKSPACE</p>
 
-          <span class="brand-name">
-            URL Shortener
-          </span>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview">
+          <span class="nav-icon" aria-hidden="true">◫</span>
+          <span>Overview</span>
+          <span class="nav-index">01</span>
         </a>
 
+        <a class="nav-link" href="#create">
+          <span class="nav-icon" aria-hidden="true">＋</span>
+          <span>Create link</span>
+          <span class="nav-index">02</span>
+        </a>
+
+        <a class="nav-link" href="#analytics">
+          <span class="nav-icon" aria-hidden="true">↗</span>
+          <span>Analytics</span>
+          <span class="nav-index">03</span>
+        </a>
+
+        <a class="nav-link" href="#links">
+          <span class="nav-icon" aria-hidden="true">▤</span>
+          <span>My links</span>
+          <span class="nav-index">04</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>WORKSPACE READY</span>
+        </div>
+
+        <div class="sidebar-version">
+          <span>URL SHORTENER STUDIO®</span>
+          <span>LESS URL. MORE ROOM.</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main workspace -->
+    <main class="main-content" id="overview">
+
+      <!-- Page header -->
+      <header class="workspace-header">
+        <div class="header-copy">
+          <p class="eyebrow">YOUR WORKSPACE</p>
+          <h1>Make every link<br>go a little further.</h1>
+          <p class="header-description">
+            One workspace for the links you create, share and track.
+          </p>
+        </div>
+
+        <div class="header-action">
+          <a href="#create" class="header-action-link">
+            <span>CREATE A LINK</span>
+            <span class="header-action-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
       </header>
 
-
-      <!-- Main content -->
-      <div class="content">
-
-        <!-- Hero -->
-        <section
-          class="hero"
-          aria-labelledby="page-title"
-        >
-
-          <p class="eyebrow">
-            LINK MANAGEMENT
+      <!-- Welcome strip -->
+      <section class="welcome-strip" aria-label="Workspace introduction">
+        <div class="welcome-copy">
+          <span class="welcome-label">THE LINK ENGINE</span>
+          <h2>Less URL. More room.</h2>
+          <p>
+            Turn a long destination into a short link that's ready to travel.
           </p>
+        </div>
 
-          <h1 id="page-title">
-            Turn long links<br>
-            into simple URLs.
-          </h1>
+        <div class="welcome-mark" aria-hidden="true">
+          <span class="welcome-mark-line"></span>
+          <span class="welcome-mark-text">S.</span>
+          <span class="welcome-mark-line"></span>
+        </div>
+      </section>
 
-          <p class="hero-description">
-            Create short, clean links that are easier to share,
-            remember, and use.
-          </p>
+      <!-- Workspace metrics -->
+      <section class="metrics-section" aria-labelledby="metrics-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">AT A GLANCE / 01</p>
+            <h2 id="metrics-heading">Your numbers</h2>
+          </div>
+          <span class="section-meta">WORKSPACE OVERVIEW</span>
+        </div>
 
-        </section>
-
-
-        <!-- URL form -->
-        <form
-          id="url-form"
-          class="url-form"
-          novalidate
-        >
-
-          <div class="form-group">
-
-            <label for="original-url">
-              Enter your URL
-            </label>
-
-            <p class="input-help">
-              Paste the full URL you want to shorten.
-            </p>
-
-            <div class="input-container">
-
-              <span
-                class="input-prefix"
-                aria-hidden="true"
-              >
-                https://
-              </span>
-
-              <input
-                type="url"
-                id="original-url"
-                name="originalUrl"
-                placeholder="example.com/your-long-url"
-                autocomplete="url"
-                inputmode="url"
-                spellcheck="false"
-                required
-                aria-describedby="url-error"
-              >
-
+        <div class="metrics-grid">
+          <article class="metric">
+            <div class="metric-top">
+              <span class="metric-label">TOTAL LINKS</span>
+              <span class="metric-icon" aria-hidden="true">↗</span>
             </div>
+            <p class="metric-value" id="total-links">—</p>
+            <p class="metric-description">Links in your collection</p>
+            <span class="metric-bottom">YOUR LINK LIBRARY</span>
+          </article>
 
-            <p
-              id="url-error"
-              class="message error-message"
-              role="alert"
-              aria-live="polite"
-              hidden
-            ></p>
+          <article class="metric">
+            <div class="metric-top">
+              <span class="metric-label">CREATED TODAY</span>
+              <span class="metric-icon" aria-hidden="true">＋</span>
+            </div>
+            <p class="metric-value" id="today-links">—</p>
+            <p class="metric-description">New links added today</p>
+            <span class="metric-bottom">DAILY ACTIVITY</span>
+          </article>
 
+          <article class="metric metric-status">
+            <div class="metric-top">
+              <span class="metric-label">WORKSPACE STATUS</span>
+              <span class="status-dot" aria-hidden="true"></span>
+            </div>
+            <p class="metric-value metric-ready">READY.</p>
+            <p class="metric-description">Ready for your next link</p>
+            <span class="metric-bottom">BUILT FOR SHARING</span>
+          </article>
+        </div>
+      </section>
+
+      <!-- Analytics -->
+      <section
+        class="panel analytics-panel"
+        id="analytics"
+        aria-labelledby="analytics-heading"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 / PERFORMANCE</p>
+            <h2 id="analytics-heading">Link activity</h2>
+          </div>
+          <span class="section-meta">LAST 7 DAYS</span>
+        </div>
+
+        <div class="analytics-intro">
+          <div>
+            <p class="analytics-title">Your links, over time.</p>
+            <p class="analytics-description">
+              Click tracking is coming soon. Your daily link activity will appear here once tracking is enabled.
+            </p>
+          </div>
+          <span class="period-badge">7D</span>
+        </div>
+
+        <div class="activity-chart" aria-label="Seven-day activity chart">
+          <div class="chart-axis" aria-hidden="true">
+            <span>100</span>
+            <span>75</span>
+            <span>50</span>
+            <span>25</span>
+            <span>0</span>
           </div>
 
+          <div class="chart-placeholder">
+            <div class="chart-grid-lines" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
 
-          <!-- Submit button -->
-          <button
-            type="submit"
-            id="submit-button"
-            class="primary-button"
-          >
+            <div class="chart-empty">
+              <span class="chart-empty-icon" aria-hidden="true">↗</span>
+              <strong>S.</strong>
+              <span>Room for your next big number.</span>
+            </div>
 
-            <span id="button-text">
-              Shorten URL
-            </span>
+            <div class="chart-days" aria-hidden="true">
+              <span>MON</span>
+              <span>TUE</span>
+              <span>WED</span>
+              <span>THU</span>
+              <span>FRI</span>
+              <span>SAT</span>
+              <span>SUN</span>
+            </div>
+          </div>
+        </div>
 
-            <span
-              id="button-loader"
-              hidden
+        <div class="analytics-footer">
+          <span class="analytics-legend">
+            <span class="legend-dot" aria-hidden="true"></span>
+            Link activity
+          </span>
+          <span class="analytics-unavailable">
+            ANALYTICS DATA NOT YET AVAILABLE
+          </span>
+        </div>
+      </section>
+
+      <!-- Link generator -->
+      <section
+        class="panel create-panel"
+        id="create"
+        aria-labelledby="create-heading"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">03 / LINK GENERATOR</p>
+            <h2 id="create-heading">Give that URL a new life.</h2>
+          </div>
+          <span class="section-meta">NEW LINK</span>
+        </div>
+
+        <p class="create-description">
+          Paste your destination below. We'll handle the long part.
+        </p>
+
+        <form class="url-form" id="url-form" novalidate>
+          <label for="original-url">DESTINATION URL</label>
+
+          <div class="input-wrap">
+            <span class="input-prefix" aria-hidden="true">↗</span>
+            <input
+              type="url"
+              id="original-url"
+              name="url"
+              placeholder="https://example.com/your-long-destination"
+              autocomplete="url"
+              inputmode="url"
+              aria-describedby="url-error api-error"
+              required
             >
-              Shortening...
-            </span>
+          </div>
 
-          </button>
+          <p class="field-error" id="url-error" role="alert" hidden></p>
+          <p class="field-error" id="api-error" role="alert" hidden></p>
 
+          <div class="form-actions">
+            <button type="submit" id="submit-button">
+              <span id="button-text">SHORTEN LINK</span>
+              <span id="button-loader" hidden aria-hidden="true"></span>
+              <span class="button-arrow" aria-hidden="true">↗</span>
+            </button>
+
+            <span class="form-note">HTTPS DESTINATIONS SUPPORTED</span>
+          </div>
         </form>
 
-
-        <!-- Shortened URL result -->
+        <!-- Generated link result -->
         <section
-          id="result-section"
           class="result-section"
-          aria-labelledby="result-title"
+          id="result-section"
+          aria-live="polite"
+          aria-atomic="true"
           hidden
         >
-
-          <div class="result-header">
-
-            <div>
-
-              <p class="result-eyebrow">
-                SHORTENED URL
-              </p>
-
-              <h2 id="result-title">
-                Your URL is ready
-              </h2>
-
-            </div>
-
-            <span class="result-status">
-              Ready
-            </span>
-
+          <div class="result-heading">
+            <span class="result-indicator" aria-hidden="true"></span>
+            <h3 id="result-title">Your short link is ready.</h3>
           </div>
 
-
-          <div class="result-box">
-
+          <div class="result-row">
             <a
-              id="short-url"
               href="#"
+              id="short-url"
               target="_blank"
               rel="noopener noreferrer"
             ></a>
 
-            <button
-              type="button"
-              id="copy-button"
-              class="copy-button"
-            >
-              Copy
-            </button>
-
+            <button type="button" id="copy-button">COPY LINK</button>
           </div>
 
-
-          <!-- Copy feedback -->
-          <p
-            id="copy-message"
-            class="message success-message"
-            role="status"
-            aria-live="polite"
-            hidden
-          >
-            URL copied to clipboard.
-          </p>
-
+          <p id="copy-message" class="copy-message" role="status"></p>
         </section>
 
+        <div class="form-footer">
+          <span class="form-footer-mark" aria-hidden="true">S.</span>
+          <span>SHORTER LINKS. SIMPLER SHARING.</span>
+        </div>
+      </section>
 
-        <!-- API error -->
-        <p
-          id="api-error"
-          class="message error-message api-error"
-          role="alert"
-          aria-live="polite"
-          hidden
-        ></p>
+      <!-- Link library -->
+      <section
+        class="panel links-panel"
+        id="links"
+        aria-labelledby="links-heading"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">04 / YOUR COLLECTION</p>
+            <h2 id="links-heading">Links, organised.</h2>
+          </div>
+          <span class="links-count" id="links-count">0 LINKS</span>
+        </div>
 
-      </div>
+        <p class="links-description">
+          Everything you've shortened, all in one place.
+        </p>
 
-    </section>
+        <div class="library-toolbar">
+          <label class="search-wrap" for="link-search">
+            <span aria-hidden="true">⌕</span>
+            <input
+              type="search"
+              id="link-search"
+              placeholder="Search links"
+              autocomplete="off"
+            >
+          </label>
 
-  </main>
+          <span class="library-label">YOUR LINK LIBRARY</span>
+        </div>
 
+        <div class="table-wrap">
+          <table class="links-table">
+            <thead>
+              <tr>
+                <th scope="col">SHORT LINK</th>
+                <th scope="col">DESTINATION</th>
+                <th scope="col">CREATED</th>
+                <th scope="col">ACTIONS</th>
+              </tr>
+            </thead>
+
+            <tbody id="links-list">
+              <tr id="empty-links" class="empty-row">
+                <td colspan="4">
+                  <div class="empty-state">
+                    <span class="empty-state-mark" aria-hidden="true">S.</span>
+                    <strong>Your collection starts here.</strong>
+                    <p>
+                      No links yet. Create your first one and it will appear
+                      in this space.
+                    </p>
+                    <a href="#create" class="empty-state-link">
+                      CREATE YOUR FIRST LINK <span aria-hidden="true">↗</span>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <span id="table-summary">Waiting for your first link</span>
+          <a href="#create">CREATE NEW <span aria-hidden="true">＋</span></a>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="workspace-footer">
+        <div class="footer-brand">
+          <span class="footer-symbol" aria-hidden="true">S.</span>
+          <span>URL SHORTENER STUDIO®</span>
+        </div>
+
+        <p>LESS URL. MORE ROOM.</p>
+        <span class="footer-year">© <span id="footer-year"></span></span>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    document.getElementById("footer-year").textContent =
+      new Date().getFullYear();
+
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.forEach((item) => item.classList.remove("active"));
+        link.classList.add("active");
+      });
+    });
+
+    const searchInput = document.getElementById("link-search");
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.trim().toLowerCase();
+      const rows = document.querySelectorAll(
+        "#links-list tr:not(#empty-links)"
+      );
+
+      rows.forEach((row) => {
+        row.hidden = !row.textContent.toLowerCase().includes(query);
+      });
+    });
+  </script>
 
   <script src="js/app.js"></script>
-
 </body>
 </html>
