@@ -12,8 +12,12 @@ resource "aws_vpc" "techcrush_vpc" {
 
 #Connect key Pair
 resource "aws_key_pair" "my_key" {
-  key_name   = "techcrush_key"                # AWS will register this name
-  public_key = file("/home/techcrush_majek2/.ssh/id_ed25519.pub") # path to your public key file
+  key_name   = "techcrush_key"
+  public_key = file(pathexpand("~/.ssh/id_ed25519.pub"))
+
+  lifecycle {
+    ignore_changes = [public_key]
+  }
 }
 
 
@@ -64,12 +68,12 @@ resource "aws_security_group" "techcrush_sg" {
   vpc_id      = aws_vpc.techcrush_vpc.id
 
   ingress {
-    description = "SSH"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  description = "SSH - restricted to my IP"
+  from_port   = 22
+  to_port     = 22
+  protocol    = "tcp"
+  cidr_blocks = ["105.113.98.99/32"]
+}
 
   ingress {
     description = "HTTP"
@@ -93,11 +97,11 @@ resource "aws_security_group" "techcrush_sg" {
 
 # EC2 Instance
 resource "aws_instance" "techcrush_web_test" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
-  subnet_id     = aws_subnet.techcrush_subnet.id
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  subnet_id              = aws_subnet.techcrush_subnet.id
   vpc_security_group_ids = [aws_security_group.techcrush_sg.id]
-  key_name      = aws_key_pair.my_key.key_name
+  key_name               = aws_key_pair.my_key.key_name
 
   tags = {
     Name = var.instance_name
