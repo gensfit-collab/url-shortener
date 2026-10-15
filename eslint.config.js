@@ -1,10 +1,13 @@
 const js = require('@eslint/js');
 
 module.exports = [
+  // Files and directories ESLint should ignore
   {
     ignores: [
       'node_modules/**',
       'coverage/**',
+      'dist/**',
+      'build/**',
       '.agents/**',
       '.claude/**',
       '.cursor/**',
@@ -12,8 +15,10 @@ module.exports = [
     ]
   },
 
+  // Recommended ESLint rules
   js.configs.recommended,
 
+  // ESLint configuration file
   {
     files: ['eslint.config.js'],
     languageOptions: {
@@ -27,6 +32,7 @@ module.exports = [
     }
   },
 
+  // Backend application code
   {
     files: ['src/**/*.js'],
     languageOptions: {
@@ -44,32 +50,39 @@ module.exports = [
     }
   },
 
+  // Prisma ES modules
   {
     files: ['src/prisma/**/*.mjs'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
       globals: {
-        process: 'readonly'
+        console: 'readonly',
+        process: 'readonly',
+        URL: 'readonly'
       }
     }
   },
 
+  // Browser-side JavaScript
   {
     files: ['public/**/*.js'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'script',
       globals: {
+        console: 'readonly',
         document: 'readonly',
         fetch: 'readonly',
         navigator: 'readonly',
         setTimeout: 'readonly',
-        URL: 'readonly'
+        URL: 'readonly',
+        window: 'readonly'
       }
     }
   },
 
+  // Automated tests
   {
     files: ['tests/**/*.js'],
     languageOptions: {
