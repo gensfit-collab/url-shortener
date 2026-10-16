@@ -3,26 +3,26 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: url-shortener-app
+    container_name: url-shortener
     ports:
       - "5000:5000"
     env_file: .env
     environment:
       PORT: 5000
     depends_on:
-      postgres:
+      url-shortener-postgres:
         condition: service_healthy
     command: sh -c "npx prisma migrate deploy && npm start"
 
-  postgres:
-    image: postgres:18
+  url-shortener-postgres:
+    image: postgres:15
     container_name: url-shortener-postgres
     environment:
       POSTGRES_USER: url-shortener-postgres
       POSTGRES_PASSWORD: supersecurepassword
       POSTGRES_DB: urlshortener
     volumes:
-      - url_shortener_data:/var/lib/postgresql
+      - url_shortener_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U url-shortener-postgres -d urlshortener"]
       interval: 5s
