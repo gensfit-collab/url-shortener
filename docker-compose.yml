@@ -4,12 +4,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: url-shortener-app
+    container_name: url-shortener
     ports:
-      - "3000:3000"
+      - "5000:5000"
     environment:
-      DATABASE_URL: postgresql://urlshortener:dockerpassword@postgres:5432/url_shortener
-      PORT: 3000
+      DATABASE_URL: postgresql://urlshortener:dockerpassword@url-shortener-postgres:5432/url_shortener
+      PORT: 5000
     depends_on:
       postgres:
         condition: service_healthy
@@ -21,8 +21,8 @@ services:
     image: postgres:18
     container_name: url-shortener-postgres
     environment:
-      POSTGRES_USER: urlshortener
-      POSTGRES_PASSWORD: dockerpassword
+      POSTGRES_USER: url-shortener-postgres
+      POSTGRES_PASSWORD: supersecurepassword
       POSTGRES_DB: url_shortener
     volumes:
       - url_shortener_data:/var/lib/postgresql
