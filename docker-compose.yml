@@ -14,8 +14,9 @@ services:
         condition: service_healthy
     command: sh -c "npx prisma migrate deploy && npm start"
 
-    url-shortener-postgres:
+  url-shortener-postgres:
     image: postgres:15
+    container_name: url-shortener-postgres
     environment:
       POSTGRES_USER: urlshortener
       POSTGRES_PASSWORD: supersecurepassword
@@ -25,10 +26,11 @@ services:
     volumes:
       - url_shortener_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U url-shortener-postgres -d urlshortener"]
+      test: ["CMD-SHELL", "pg_isready -U urlshortener -d urlshortener"]
       interval: 5s
       timeout: 5s
       retries: 10
 
 volumes:
   url_shortener_data:
+
